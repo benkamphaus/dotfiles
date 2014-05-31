@@ -8,22 +8,10 @@ ZSH=$HOME/.oh-my-zsh
 #ZSH_THEME="smt"
 ZSH_THEME="pure"
 
-alias zshconfig="mvim ~/.zshrc"
-alias ohmyzsh="mvim ~/.oh-my-zsh"
+alias zshconfig="vim ~/.zshrc"
+alias ohmyzsh="vim ~/.oh-my-zsh"
 alias s="source"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment following line if you want to  shown in the command execution time stamp 
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -53,18 +41,13 @@ alias ls='ls $LS_OPTIONS'
 
 # Preferred editor for local and remote sessions
 export EDITOR="vim"
-
-# alias to turn on caleuche
-alias cal-on="wol 40:61:86:f2:9f:44"
+export PAGER="less"
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
 # Flag for Datomic
 export JAVA_HOME="/usr"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # find the directory of the named Python module.
 function pymoddir () {
@@ -88,25 +71,9 @@ compinit
 autoload  -U promptinit
 promptinit
 
-# custom prompt test
-#export PROMPT='$fg_bold[green]% @%m $fg_bold[blue]$(git_prompt_info) %'
-#export RPROMPT=''
-
-# prompt options
-#alias simple="prompt adam1"
-#alias verbose="prompt clint"
-
-#prompt="(精力善用)λ "
-
-# Option to uncomment to use MacVim if necessary.
-#alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-
 # Use vi/vim mode for terminal
 set -o vi
 bindkey -v
-
-# set alias for matlab
-alias matlab="/Applications/MATLAB_R2011a_Student.app/bin/matlab -nodisplay"
 
 # Set ssh connections:
 source ~/.sshaliases
