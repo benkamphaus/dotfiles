@@ -15,7 +15,7 @@ set shiftwidth=4
 set smartindent
 
 " show a few types of white space.
-set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<
 set list
 
 colorscheme jellybeans
