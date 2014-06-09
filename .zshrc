@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh configuration.
+# Path to your oh-my-zsh configuration.  
 ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -46,8 +46,9 @@ export PAGER="less"
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# Flag for Datomic
-export JAVA_HOME="/usr"
+# Flag for Datomic, java, etc.
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+export PATH=$JAVA_HOME/bin:$PATH
 
 # find the directory of the named Python module.
 function pymoddir () {
@@ -76,4 +77,4 @@ set -o vi
 bindkey -v
 
 # Set ssh connections:
-source ~/.sshaliases
+# source ~/.sshaliases
