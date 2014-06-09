@@ -25,6 +25,8 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/Users/bkamphaus/Sage:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # virtualenv stuff
+export PROJECT_HOME=$HOME/code/py
+source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.env
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
