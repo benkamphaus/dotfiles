@@ -2,8 +2,7 @@ set nocompatible
 
 " turn on line numbers.
 set nu
-
-execute pathogen#infect()
+set t_Co=256
 
 " turn off annoying terminal beeps
 set visualbell
@@ -89,6 +88,7 @@ hi conditional ctermfg=red
 hi statement ctermfg=blue
 hi repeat ctermfg=yellow
 hi operator ctermfg=magenta
+hi pythonInclude ctermfg=darkmagenta
 
 " function that enables hex editing with F8
 noremap <F8> :call HexMe()<CR>
