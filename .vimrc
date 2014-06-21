@@ -1,32 +1,35 @@
+" Don't enforace vi compatibility
 set nocompatible
+
+" Turn on pathogen
+execute pathogen#infect()
 
 " turn on line numbers.
 set nu
-set t_Co=256
 
 " turn off annoying terminal beeps
 set visualbell
 
-" set tab as 4 spaces.
+" Set color for 256-color terminals
+set t_Co=256
+
+" set tab as 4 spaces in every case.
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set smartindent
 
 " show a few types of white space.
 set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<
 set list
 
-colorscheme jellybeans
-if has('gui_running')
-  colorscheme railscasts
-endif
+" use 256-color terminal ir black scheme
+colorscheme ir_black
 
 " allow backspacing
 set backspace=indent,eol,start
 
-" highlight searchterms
-set hlsearch
 
 " fold settings
 set foldmethod=indent
@@ -59,36 +62,24 @@ set ruler
 " turn on syntax highlighting for mac
 filetype plugin indent on
 syntax on
-set term=builtin_ansi
-
-" set LineNr highlighting (put here b/c doesn't work higher)
-highlight LineNr term=bold ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=#666666 guibg=#111111
-hi cursorline ctermbg=darkgray guibg=#252525
 
 " Make VertSplit characters less annoying
 hi VertSplit ctermfg=black ctermbg=black guifg=#111111 guibg=#111111
 
 " turn on status bars permanently and set to dark gray.
-hi statuslinenc ctermbg=black guibg=#252525 guifg=#eeeeee
-hi statusline ctermbg=black ctermfg=blue
 set laststatus=2
 
-" set background of highlighted text mint green.
-hi visual guibg=#2e9afe
-
 " keep background and whitespace dark
-hi normal guibg=#111111
-hi nontext guibg=#111111 guifg=#353535
+hi nontext ctermfg=black
 
-" syntax tweaks
-let python_highlight_all=1
-hi comment ctermfg=darkgreen
-hi function ctermfg=green
-hi conditional ctermfg=red
-hi statement ctermfg=blue
-hi repeat ctermfg=yellow
-hi operator ctermfg=magenta
-hi pythonInclude ctermfg=darkmagenta
+" highlight searchterms
+set hlsearch
+hi search ctermbg=red
+
+" highlight tweaks
+hi cursorline ctermbg=black
+hi statusline ctermbg=black
+hi statuslinenc ctermbg=black
 
 " function that enables hex editing with F8
 noremap <F8> :call HexMe()<CR>

@@ -11,7 +11,7 @@ ZSH_THEME="pure"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias s="source"
-
+alias h="history"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -20,8 +20,10 @@ plugins=(git compleat osx)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Fixes some character issues
+export LANG=en_US.UTF-8
 
+# Path config
 export PATH="/Users/bkamphaus/Sage:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # virtualenv stuff
@@ -58,6 +60,9 @@ function pymoddir () {
         print _.dirname(_.realpath(${1}.__file__[:-1]))"
         )"
 }
+
+# for riak
+ulimit -n 8192 
 
 # function for grepping through python files.
 function greppy() { find . -name '*.py' -exec grep -nHr --color "$1" {} \; ; }
