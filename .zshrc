@@ -12,6 +12,7 @@ alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias s="source"
 alias h="history"
+alias pd="pushd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -65,11 +66,16 @@ function pymoddir () {
 ulimit -n 8192 
 
 # function for grepping through python files.
+function findgrep() { find . -name "$2" -exec grep -nHr --color "$1" {} \; ; }
 function greppy() { find . -name '*.py' -exec grep -nHr --color "$1" {} \; ; }
 function grepcy() { find . -name '*.pyx' -exec grep -nHr --color "$1" {} \; ; }
 function grepm() { find . -name '*.m' -exec grep -nHr --color "$1" {} \; ; }
 function grepclj() { find . -name '*.clj' -exec grep -nHr --color "$1" {} \; ; }
 function greptex() { find . -name '*.tex' -exec grep -nHr --color "$1" {} \; ; }
+function greprb() { find . -name '*.rb' -exec grep -nHr --color "$1" {} \; ; }
+function grepjava() { find . -name '*.java' -exec grep -nHr --color "$1" {} \; ; }
+function grepjs() { find . -name '*.js' -exec grep -nHr --color "$1" {} \; ; }
+
 
 # tab completion
 autoload -U compinit
@@ -85,3 +91,19 @@ bindkey -v
 
 # Set ssh connections:
 # source ~/.sshaliases
+# lein shortcuts
+alias lrepl="lein repl"
+alias ltrepl="lein trampoline repl"
+
+# AWS environment setup
+source ~/.aws/aws-creds.sh
+
+# Infinispan environment setup
+export INFINISPAN_HOME="/Users/bkamphaus/infinispan-5.1.6.FINAL"
+export ISPN_HOME=$INFINISPAN_HOME
+
+# Couchbase environment setup
+export PATH=$PATH:/Applications/Couchbase\ Server.app/Contents/Resources/couchbase-core/bin
+
+# Datomic config
+# export DATOMIC_VERSION=0.9.4880.2

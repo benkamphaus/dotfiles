@@ -70,7 +70,7 @@ hi VertSplit ctermfg=black ctermbg=black guifg=#111111 guibg=#111111
 set laststatus=2
 
 " keep background and whitespace dark
-hi nontext ctermfg=black
+hi nontext ctermfg=black guibg=#000000 guifg=#111111
 
 " highlight searchterms
 set hlsearch
