@@ -14,4 +14,4 @@ for src_file in src_files:
     try:
         copy(src_file, this_dir + sep + basename(src_file))
     except IOError:
-        print("Skipping " + src_file + " b/c it's not present in deployment.")
+        print("Skipping " + src_file + " b/c it's either a dir or not present.")
