@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/bkamphaus/code/datomic-manual-tests'
+let g:netrw_dirhist_2='/Users/bkamphaus/code/transit-proj'
+let g:netrw_dirhist_3='/Users/bkamphaus/code/transit-proj/transit'
+let g:netrw_dirhist_4='/Users/bkamphaus/code/transit-proj'
+let g:netrw_dirhist_5='/Users/bkamphaus/datomic/datomic-pro-0.9.4956'
+let g:netrw_dirhist_6='/Users/bkamphaus'
+let g:netrw_dirhist_7='/Users/bkamphaus/code/datomic-manual-tests'
+let g:netrw_dirhist_8='/Users/bkamphaus/datomic/datomic-pro-0.9.4956'
+let g:netrw_dirhist_9='/Users/bkamphaus/code/datomic-docs/docs/impl'

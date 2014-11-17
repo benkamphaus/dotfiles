@@ -25,7 +25,7 @@ set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<
 set list
 
 " use 256-color terminal ir black scheme
-colorscheme ir_black
+colorscheme Tomorrow-Night-Eighties
 
 " allow backspacing
 set backspace=indent,eol,start
@@ -70,7 +70,8 @@ hi VertSplit ctermfg=black ctermbg=black guifg=#111111 guibg=#111111
 set laststatus=2
 
 " keep background and whitespace dark
-hi nontext ctermfg=black guibg=#000000 guifg=#111111
+hi nontext ctermfg=black guifg=#333333
+hi normal ctermbg=none guibg=#111111
 
 " highlight searchterms
 set hlsearch
