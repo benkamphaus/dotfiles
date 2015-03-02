@@ -6,7 +6,8 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="smt"
-ZSH_THEME="pure"
+#ZSH_THEME="pure"
+ZSH_THEME="kolo"
 
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
@@ -25,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Path config
-export PATH="/Users/bkamphaus/Sage:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
+export PATH="/Users/bkamphaus/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # virtualenv stuff
 export PROJECT_HOME=$HOME/code/py
@@ -75,6 +76,11 @@ function greptex() { find . -name '*.tex' -exec grep -nHr --color "$1" {} \; ; }
 function greprb() { find . -name '*.rb' -exec grep -nHr --color "$1" {} \; ; }
 function grepjava() { find . -name '*.java' -exec grep -nHr --color "$1" {} \; ; }
 function grepjs() { find . -name '*.js' -exec grep -nHr --color "$1" {} \; ; }
+function greporg() { find . -name '*.org' -exec grep -nHr --color "$1" {} \; ; }
+function grepscala() { find . -name '*.scala' -exec grep -nHr --color "$1" {} \; ; }
+function grepgroovy() { find . -name '*.groovy' -exec grep -nHr --color "$1" {} \; ; }
+function grepedn() { find . -name '*.edn' -exec grep -nHr --color "$1" {} \; ; }
+function grepjson() { find . -name '*.json' -exec grep -nHr --color "$1" {} \; ; }
 
 
 # tab completion
@@ -89,6 +95,9 @@ promptinit
 set -o vi
 bindkey -v
 
+# still want ctrl-R for reverse search
+bindkey "^R" history-incremental-search-backward
+
 # Set ssh connections:
 # source ~/.sshaliases
 # lein shortcuts
@@ -102,8 +111,8 @@ source ~/.aws/aws-creds.sh
 export INFINISPAN_HOME="/Users/bkamphaus/infinispan-5.1.6.FINAL"
 export ISPN_HOME=$INFINISPAN_HOME
 
-# Couchbase environment setup
-export PATH=$PATH:/Applications/Couchbase\ Server.app/Contents/Resources/couchbase-core/bin
-
-# Datomic config
-# export DATOMIC_VERSION=0.9.4880.2
+function metric-grep () {
+  cat *.log | perl -n -e 'print "$1 $2\n" if /^(.*) INFO .* '"$1"' {.*?'"$2"' ([0-9]+).*?}/' | less
+}
+#-n -e 'print "$1\n" if /(:TransactionBytes .*?})/' | less
+alias clj="java -cp clojure.jar clojure.main"

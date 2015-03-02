@@ -27,6 +27,7 @@ set list
 " use 256-color terminal ir black scheme
 colorscheme Tomorrow-Night-Eighties
 
+
 " allow backspacing
 set backspace=indent,eol,start
 
@@ -81,6 +82,9 @@ hi search ctermbg=red
 hi cursorline ctermbg=black
 hi statusline ctermbg=black
 hi statuslinenc ctermbg=black
+
+" fix zsh/sh/bash keyword
+hi keyword ctermfg=blue guifg=#6D9CBE
 
 " function that enables hex editing with F8
 noremap <F8> :call HexMe()<CR>
