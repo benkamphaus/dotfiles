@@ -1,4 +1,4 @@
-" Don't enforace vi compatibility
+" Don't enforce vi compatibility
 set nocompatible
 
 " Turn on pathogen
@@ -13,7 +13,7 @@ set visualbell
 " Set color for 256-color terminals
 set t_Co=256
 
-" set tab as 4 spaces in every case.
+" tab settings
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -24,13 +24,10 @@ set smartindent
 set listchars=tab:▸\ ,eol:¬,trail:~,extends:>,precedes:<
 set list
 
-" use 256-color terminal ir black scheme
 colorscheme Tomorrow-Night-Eighties
-
 
 " allow backspacing
 set backspace=indent,eol,start
-
 
 " fold settings
 set foldmethod=indent
@@ -86,8 +83,18 @@ hi statuslinenc ctermbg=black
 " fix zsh/sh/bash keyword
 hi keyword ctermfg=blue guifg=#6D9CBE
 
+" julia hl tweaks
+hi juliaConditional ctermfg=yellow
+hi juliaKeyword ctermfg=red
+hi juliaFunctionBlock ctermfg=green
+hi juliaTypeBlock ctermfg=magenta
+hi juliaRepeat ctermfg=cyan
+
 " function that enables hex editing with F8
 noremap <F8> :call HexMe()<CR>
+
+" what does it mean?
+au VimEnter * RainbowParenthesesToggle
 
 let $in_hex=0
 function HexMe()
