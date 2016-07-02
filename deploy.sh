@@ -1,3 +1,2 @@
 #!/bin/zsh
-cp .* ~/.
-cp -r .lein ~/.
+cp -r .* ~/.
