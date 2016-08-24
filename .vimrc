@@ -51,7 +51,7 @@ set nowrap
 set scrolloff=8
 
 " set font size
-set guifont=Bitstream\ Vera\ Sans\ Mono:h15
+set guifont=Hack:h12
 
 " turn on ruler and cursorline
 set cursorline
@@ -132,3 +132,7 @@ function! Smart_TabComplete()
 endfunction
 
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+
+" vim airline (powerline) settings
+let g:airline_powerline_fonts = 1 
+let g:airline_theme = 'base16_ashes'
