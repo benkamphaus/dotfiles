@@ -1,13 +1,10 @@
-# Path to your oh-my-zsh configuration.  
+# oh-my-zsh config
 ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="smt"
-#ZSH_THEME="pure"
-ZSH_THEME="kolo"
+# set name of the theme to load:
+# look in ~/.oh-my-zsh/themes/
+# nice ones: smt, pure, kolo
+ZSH_THEME="smt"
 
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
@@ -18,7 +15,7 @@ alias pd="pushd"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git compleat osx)
+plugins=(git compleat osx autojump z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,8 +50,20 @@ export PAGER="less"
 export ARCHFLAGS="-arch x86_64"
 
 # Flag for Datomic, java, etc.
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-export PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export PATHBASE=$PATH
+export JULIA_HOME="/Applications/Julia-0.4.5.app/Contents/Resources/julia/bin" 
+export PATH=$JULIA_HOME:$JAVA_HOME/bin:$PATHBASE
+
+function java7 () {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+    export PATH=$JAVA_HOME/bin:$PATHBASE
+}
+
+function java8 () {
+    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    export PATH=$JAVA_HOME/bin:$PATHBASE
+}
 
 # find the directory of the named Python module.
 function pymoddir () {
@@ -66,7 +75,7 @@ function pymoddir () {
 # for riak
 ulimit -n 8192 
 
-# function for grepping through python files.
+# function for grepping through various code files, verbose but w/e.
 function findgrep() { find . -name "$2" -exec grep -nHr --color "$1" {} \; ; }
 function greppy() { find . -name '*.py' -exec grep -nHr --color "$1" {} \; ; }
 function grepcy() { find . -name '*.pyx' -exec grep -nHr --color "$1" {} \; ; }
@@ -81,7 +90,6 @@ function grepscala() { find . -name '*.scala' -exec grep -nHr --color "$1" {} \;
 function grepgroovy() { find . -name '*.groovy' -exec grep -nHr --color "$1" {} \; ; }
 function grepedn() { find . -name '*.edn' -exec grep -nHr --color "$1" {} \; ; }
 function grepjson() { find . -name '*.json' -exec grep -nHr --color "$1" {} \; ; }
-
 
 # tab completion
 autoload -U compinit
@@ -101,8 +109,7 @@ bindkey "^R" history-incremental-search-backward
 # Set ssh connections:
 # source ~/.sshaliases
 # lein shortcuts
-alias lrepl="lein repl"
-alias ltrepl="lein trampoline repl"
+alias repl="lein repl"
 
 # AWS environment setup
 source ~/.aws/aws-creds.sh
@@ -111,8 +118,37 @@ source ~/.aws/aws-creds.sh
 export INFINISPAN_HOME="/Users/bkamphaus/infinispan-5.1.6.FINAL"
 export ISPN_HOME=$INFINISPAN_HOME
 
+# Datomic log grepping routines
 function metric-grep () {
   cat *.log | perl -n -e 'print "$1 $2\n" if /^(.*) INFO .* '"$1"' {.*?'"$2"' ([0-9]+).*?}/' | less
 }
+function mb-grep () {
+  cat *.log | perl -nle 'print $1 if /:AvailableMB.*?(\d+)/' | less
+}
 #-n -e 'print "$1\n" if /(:TransactionBytes .*?})/' | less
 alias clj="java -cp clojure.jar clojure.main"
+
+## boot2docker now gone // source ~/.docker-env
+
+source ~/.datomic/my-datomic-creds.sh
+source ~/.datomic/datomic_bash
+
+# So I can enter key on terminal
+eval $(gpg-agent --daemon)
+export GPG_TTY=$(tty)
+
+# alias for IJulia terminal
+alias ijulia="ipython console --kernel julia-0.3"
+
+# annoying processes that don't have readline built in properly
+export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
+alias pgup="postgres -D /usr/local/var/postgres"
+
+# docker stuff
+eval $(docker-machine env default)
+
+# Added by Dato Launcher v2.1.0
+function pyconda () {
+    export PATH="/Users/bkamphaus/anaconda/bin:$PATH"
+}
+export PATH="/usr/local/sbin:$PATH"
