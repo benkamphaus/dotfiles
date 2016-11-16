@@ -23,11 +23,10 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Path config
-export PATH="/Users/bkamphaus/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
+export PATH="/home/bkamphaus/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 
 # virtualenv stuff
 export PROJECT_HOME=$HOME/code/py
-source /usr/local/bin/virtualenvwrapper.sh
 export WORKON_HOME=~/.env
 alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 
@@ -50,20 +49,9 @@ export PAGER="less"
 export ARCHFLAGS="-arch x86_64"
 
 # Flag for Datomic, java, etc.
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export PATHBASE=$PATH
 export JULIA_HOME="/Applications/Julia-0.4.5.app/Contents/Resources/julia/bin" 
 export PATH=$JULIA_HOME:$JAVA_HOME/bin:$PATHBASE
-
-function java7 () {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-    export PATH=$JAVA_HOME/bin:$PATHBASE
-}
-
-function java8 () {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-    export PATH=$JAVA_HOME/bin:$PATHBASE
-}
 
 # find the directory of the named Python module.
 function pymoddir () {
@@ -71,9 +59,6 @@ function pymoddir () {
         print _.dirname(_.realpath(${1}.__file__[:-1]))"
         )"
 }
-
-# for riak
-ulimit -n 8192 
 
 # function for grepping through various code files, verbose but w/e.
 function findgrep() { find . -name "$2" -exec grep -nHr --color "$1" {} \; ; }
@@ -106,17 +91,8 @@ bindkey -v
 # still want ctrl-R for reverse search
 bindkey "^R" history-incremental-search-backward
 
-# Set ssh connections:
-# source ~/.sshaliases
 # lein shortcuts
 alias repl="lein repl"
-
-# AWS environment setup
-source ~/.aws/aws-creds.sh
-
-# Infinispan environment setup
-export INFINISPAN_HOME="/Users/bkamphaus/infinispan-5.1.6.FINAL"
-export ISPN_HOME=$INFINISPAN_HOME
 
 # Datomic log grepping routines
 function metric-grep () {
@@ -128,13 +104,7 @@ function mb-grep () {
 #-n -e 'print "$1\n" if /(:TransactionBytes .*?})/' | less
 alias clj="java -cp clojure.jar clojure.main"
 
-## boot2docker now gone // source ~/.docker-env
-
-source ~/.datomic/my-datomic-creds.sh
-source ~/.datomic/datomic_bash
-
 # So I can enter key on terminal
-eval $(gpg-agent --daemon)
 export GPG_TTY=$(tty)
 
 # alias for IJulia terminal
@@ -144,11 +114,4 @@ alias ijulia="ipython console --kernel julia-0.3"
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 alias pgup="postgres -D /usr/local/var/postgres"
 
-# docker stuff
-eval $(docker-machine env default)
-
-# Added by Dato Launcher v2.1.0
-function pyconda () {
-    export PATH="/Users/bkamphaus/anaconda/bin:$PATH"
-}
-export PATH="/usr/local/sbin:$PATH"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cuda/lib64
