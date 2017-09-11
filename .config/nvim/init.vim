@@ -7,13 +7,20 @@ call plug#begin('~/.vim/plugged')
 Plug 'neomake/neomake'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-fireplace'
-Plug 'tpope/salve'
+Plug 'tpope/vim-salve'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'guns/vim-clojure-highlight'
 Plug 'guns/vim-clojure-static'
+Plug 'pangloss/vim-javascript'
+Plug 'rust-lang/rust.vim'
+Plug 'mxw/vim-jsx'
+Plug 'leshill/vim-json'
+Plug 'jez/vim-better-sml'
 
 call plug#end()
 
