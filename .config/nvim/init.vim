@@ -1,8 +1,21 @@
 " Don't enforce vi compatibility
 set nocompatible
 
-" Turn on pathogen
-execute pathogen#infect()
+" Use vim-plug for plugin management
+call plug#begin('~/.vim/plugged')
+
+Plug 'neomake/neomake'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/salve'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'guns/vim-clojure-highlight'
+Plug 'guns/vim-clojure-static'
+
+call plug#end()
 
 " turn on line numbers.
 set nu
@@ -132,6 +145,7 @@ function! Smart_TabComplete()
 endfunction
 
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+
 
 " vim airline (powerline) settings
 let g:airline_powerline_fonts = 1 
