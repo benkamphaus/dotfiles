@@ -6,15 +6,10 @@ ZSH=$HOME/.oh-my-zsh
 # nice ones: smt, pure, kolo
 ZSH_THEME="smt"
 
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
 alias s="source"
 alias h="history"
 alias pd="pushd"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git compleat osx autojump z)
 
 source $ZSH/oh-my-zsh.sh
@@ -22,18 +17,14 @@ source $ZSH/oh-my-zsh.sh
 # Fixes some character issues
 export LANG=en_US.UTF-8
 
-# Path config
-export PATH="/Users/bkamphaus/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
-
-# virtualenv stuff
-export PROJECT_HOME=$HOME/code/py
-source /usr/local/bin/virtualenvwrapper.sh
-export WORKON_HOME=~/.env
-alias ipy="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
-
+# OSX Path config
+# export PATH="/Users/bkamphaus/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/texbin"
 # append custom manpath.
-export MANPATH=/usr/local/man:$MANPATH
-export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+# export MANPATH=/usr/local/man:$MANPATH
+# export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+
+# OSX Compilation flags
+export ARCHFLAGS="-arch x86_64"
 
 # ls aliases
 export LS_OPTIONS='--color=auto'
@@ -46,36 +37,25 @@ alias ls='ls $LS_OPTIONS'
 export EDITOR="vim"
 export PAGER="less"
 
-# Compilation flags
-export ARCHFLAGS="-arch x86_64"
-
-# Flag for Datomic, java, etc.
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# Various path config
+export PATH="/usr/local/sbin:$PATH"
 export PATHBASE=$PATH
-export JULIA_HOME="/Applications/Julia-0.4.5.app/Contents/Resources/julia/bin" 
-export PATH=$JULIA_HOME:$JAVA_HOME/bin:$PATHBASE
 
-function java7 () {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-    export PATH=$JAVA_HOME/bin:$PATHBASE
-}
+# OS X Java version swapping
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# function java7 () {
+#    export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+#    export PATH=$JAVA_HOME/bin:$PATHBASE
+#}
+#
+#function java8 () {
+#    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+#    export PATH=$JAVA_HOME/bin:$PATHBASE
+#}
 
-function java8 () {
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-    export PATH=$JAVA_HOME/bin:$PATHBASE
-}
 
-# find the directory of the named Python module.
-function pymoddir () {
-    echo "$(python -c "import os.path as _, ${1}; \
-        print _.dirname(_.realpath(${1}.__file__[:-1]))"
-        )"
-}
-
-# for riak
-ulimit -n 8192 
-
-# function for grepping through various code files, verbose but w/e.
+# functions for grepping through various code files when piping from find
+# -- copy/pasta verbose but w/e.
 function findgrep() { find . -name "$2" -exec grep -nHr --color "$1" {} \; ; }
 function greppy() { find . -name '*.py' -exec grep -nHr --color "$1" {} \; ; }
 function grepcy() { find . -name '*.pyx' -exec grep -nHr --color "$1" {} \; ; }
@@ -102,21 +82,9 @@ promptinit
 # Use vi/vim mode for terminal
 set -o vi
 bindkey -v
-
-# still want ctrl-R for reverse search
+# but keep ctrl-R for reverse search
 bindkey "^R" history-incremental-search-backward
 
-# Set ssh connections:
-# source ~/.sshaliases
-# lein shortcuts
-alias repl="lein repl"
-
-# AWS environment setup
-source ~/.aws/aws-creds.sh
-
-# Infinispan environment setup
-export INFINISPAN_HOME="/Users/bkamphaus/infinispan-5.1.6.FINAL"
-export ISPN_HOME=$INFINISPAN_HOME
 
 # Datomic log grepping routines
 function metric-grep () {
@@ -125,30 +93,10 @@ function metric-grep () {
 function mb-grep () {
   cat *.log | perl -nle 'print $1 if /:AvailableMB.*?(\d+)/' | less
 }
-#-n -e 'print "$1\n" if /(:TransactionBytes .*?})/' | less
-alias clj="java -cp clojure.jar clojure.main"
 
-## boot2docker now gone // source ~/.docker-env
-
-source ~/.datomic/my-datomic-creds.sh
-source ~/.datomic/datomic_bash
-
-# So I can enter key on terminal
-eval $(gpg-agent --daemon)
-export GPG_TTY=$(tty)
-
-# alias for IJulia terminal
-alias ijulia="ipython console --kernel julia-0.3"
+# So I can enter key on terminal on Mac OS X
+# eval $(gpg-agent --daemon)
+# export GPG_TTY=$(tty)
 
 # annoying processes that don't have readline built in properly
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
-alias pgup="postgres -D /usr/local/var/postgres"
-
-# docker stuff
-eval $(docker-machine env default)
-
-# Added by Dato Launcher v2.1.0
-function pyconda () {
-    export PATH="/Users/bkamphaus/anaconda/bin:$PATH"
-}
-export PATH="/usr/local/sbin:$PATH"
