@@ -1,16 +1,8 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+# ohmyzsh stuff
 export ZSH="$HOME/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="smt"
 
-# Fixes some character issues
+# fixes some character issues
 export LANG=en_US.UTF-8
 
 # ls aliases
@@ -19,6 +11,8 @@ eval $(gdircolors -b ~/.dir_colors) > /dev/null
 alias la='gls $LS_OPTIONS -a'
 alias ll='gls $LS_OPTIONS -lrt'
 alias ls='gls $LS_OPTIONS'
+
+# other aliases
 alias s="source"
 alias h="history"
 alias pd="pushd"
@@ -52,7 +46,6 @@ compinit
 autoload  -U promptinit
 promptinit
 
-
 # Datomic log grepping routines
 function metric-grep () {
   cat *.log | perl -n -e 'print "$1 $2\n" if /^(.*) INFO .* '"$1"' {.*?'"$2"' ([0-9]+).*?}/' | less
@@ -68,30 +61,8 @@ export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 plugins=(git python tmux z helm kubectl vi-mode)
 source $ZSH/oh-my-zsh.sh
 
-
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh" ]; then
-    . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
-
 
 # Use vi/vim mode for terminal
 set -o vi
@@ -102,4 +73,5 @@ bindkey "^R" history-incremental-search-backward
 
 alias ipython="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
 PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
-alias conda=mamba
+
+alias repl="clj -J-Dclojure.server.repl=\"{:port 5555 :accept clojure.core.server/repl}\""
