@@ -4,23 +4,8 @@ set nocompatible
 " Use vim-plug for plugin management
 call plug#begin('~/.vim/plugged')
 
-Plug 'neomake/neomake'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-salve'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'bhurlow/vim-parinfer'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'guns/vim-sexp'
-Plug 'guns/vim-clojure-highlight'
-Plug 'guns/vim-clojure-static'
-Plug 'pangloss/vim-javascript'
-Plug 'rust-lang/rust.vim'
-Plug 'mxw/vim-jsx'
-Plug 'leshill/vim-json'
-Plug 'jez/vim-better-sml'
+Plug 'jebberjeb/clojure-socketrepl.nvim'
+Plug 'eraserhd/parinfer-rust'
 
 call plug#end()
 
@@ -114,7 +99,7 @@ hi juliaRepeat ctermfg=cyan
 noremap <F8> :call HexMe()<CR>
 
 " what does it mean?
-au VimEnter * RainbowParenthesesToggle
+" au VimEnter * RainbowParenthesesToggle
 
 let $in_hex=0
 function HexMe()
@@ -131,29 +116,25 @@ endfunction
 
 " Enable context specific tab completion:
 function! Smart_TabComplete()
-  let line = getline('.')                         " current line
+  let line = getline('.')                     " current line
 
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  " line to one character right
-                                                  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
+  let substr = strpart(line, -1, col('.')+1)  " from the start of the current
+                                              " line to one character right
+                                              " of the cursor
+  let substr = matchstr(substr, "[^ \t]*$")   " word till cursor
+  if (strlen(substr)==0)                      " nothing to match on empty string
     return "\<tab>"
   endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  let has_period = match(substr, '\.') != -1  " position of period, if any
+  let has_slash = match(substr, '\/') != -1   " position of slash, if any
   if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
+    return "\<C-X>\<C-P>"                     " existing text matching
   elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
+    return "\<C-X>\<C-F>"                     " file matching
   else
-    return "\<C-X>\<C-O>"                         " plugin matching
+    return "\<C-X>\<C-O>"                     " plugin matching
   endif
 endfunction
 
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
-
-" vim airline (powerline) settings
-let g:airline_powerline_fonts = 1 
-let g:airline_theme = 'base16_ashes'

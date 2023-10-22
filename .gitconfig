@@ -46,3 +46,7 @@
 
 [merge]
     tool = vimdiff
+[core]
+	excludesfile = /Users/bkamphaus/.gitignore
+[init]
+	defaultBranch = main

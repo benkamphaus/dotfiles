@@ -1,18 +1,17 @@
-# oh-my-zsh config
-ZSH=$HOME/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# set name of the theme to load:
-# look in ~/.oh-my-zsh/themes/
-# nice ones: smt, pure, kolo
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="smt"
-plugins=(git compleat osx autojump z)
-source $ZSH/oh-my-zsh.sh
 
 # Fixes some character issues
 export LANG=en_US.UTF-8
-
-# OSX Compilation flags
-export ARCHFLAGS="-arch x86_64"
 
 # ls aliases
 export LS_OPTIONS='--color=auto'
@@ -24,6 +23,7 @@ alias s="source"
 alias h="history"
 alias pd="pushd"
 alias vim="nvim"
+alias love="open -n -a love"
 
 # Preferred editor for local and remote sessions
 export EDITOR="nvim"
@@ -52,11 +52,6 @@ compinit
 autoload  -U promptinit
 promptinit
 
-# Use vi/vim mode for terminal
-set -o vi
-bindkey -v
-# but keep ctrl-R for reverse search
-bindkey "^R" history-incremental-search-backward
 
 # Datomic log grepping routines
 function metric-grep () {
@@ -68,3 +63,43 @@ function mb-grep () {
 
 # annoying processes that don't have readline built in properly
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
+
+# zsh setup via oh-my-zsh
+plugins=(git python tmux z helm kubectl vi-mode)
+source $ZSH/oh-my-zsh.sh
+
+
+# Compilation flags
+export ARCHFLAGS="-arch $(uname -m)"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+if [ -f "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh" ]; then
+    . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
+
+
+# Use vi/vim mode for terminal
+set -o vi
+bindkey -v
+# bindkey '\e' vi-cmd-mode
+# but keep ctrl-R for reverse search
+bindkey "^R" history-incremental-search-backward
+
+alias ipython="python -c 'import IPython; IPython.terminal.ipapp.launch_new_instance()'"
+PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+alias conda=mamba
